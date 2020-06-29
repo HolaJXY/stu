@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>s-cloud</artifactId>
+    <groupId>com.king.soft</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>eureka-client</artifactId>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <!--spring-boot-starter-web: 表示这是个web服务，会提供控制层-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!--springboot 整合eureka客户端  spring-cloud-starter-netflix-eureka-client 表示这是个 eureka 客户端。-->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.springframework.cloud</groupId>-->
+      <!--<artifactId>spring-cloud-starter-zipkin</artifactId>-->
+    <!--</dependency>-->
+  </dependencies>
+
+  <build>
+    <!--模块自身打包名称 -->
+    <finalName>${project.artifactId}-${version}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <!-- 如果只想有finalName,不需要连接assembly.xml中的id -->
+          <appendAssemblyId>false</appendAssemblyId>
+          <!--自定义打包名称 -->
+          <finalName>${project.artifactId}-zip</finalName>
+          <descriptors>
+            <descriptor>src/main/resources/assembly.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+            <phase>package</phase> <!-- bind to the packaging phase -->
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!--pom中定义一些环境变量  <activeByDefault>true</activeByDefault> 为true则为默认环境 <properties>标签中可以自定义标签可通过${app.env}来引用 -->
+  <profiles>
+    <!--region 开发环境-->
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <app.env>dev</app.env>
+      </properties>
+    </profile>
+    <!--endregion-->
+    <!--region 集成环境-->
+    <profile>
+      <id>integrate</id>
+      <properties>
+        <app.env>integrate</app.env>
+      </properties>
+    </profile>
+    <!--endregion-->
+    <!--region 测试环境-->
+    <profile>
+      <id>sit</id>
+      <properties>
+        <app.env>sit</app.env>
+      </properties>
+    </profile>
+    <!--endregion-->
+    <!--region UAT环境-->
+    <profile>
+      <id>uat</id>
+      <properties>
+        <app.env>uat</app.env>
+      </properties>
+    </profile>
+    <!--endregion-->
+    <!--region 性能环境-->
+    <profile>
+      <id>perf</id>
+      <properties>
+        <app.env>perf</app.env>
+      </properties>
+    </profile>
+    <!--endregion-->
+    <!--region 培训环境-->
+    <profile>
+      <id>train</id>
+      <properties>
+        <app.env>train</app.env>
+      </properties>
+    </profile>
+    <!--endregion-->
+  </profiles>
+
+</project>

@@ -1,0 +1,7 @@
+打出标准的SpringBoot项目包
+
+最终生成一个zip，一个tar.gz
+
+将application.yml打包到压缩包的跟路径
+
+将start.sh，stop.sh打到压缩包跟路径，并配置权限
