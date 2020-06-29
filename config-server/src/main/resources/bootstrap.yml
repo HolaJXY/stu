@@ -18,9 +18,11 @@ spring:
         server:
           git:
             #https://github.com/how2j/springcloudConfig/
-            uri: https://github.com/HolaJXY/springcloudConfig/
+            uri: https://github.com/HolaJXY/stu/  # 配置git仓库的地址   http://127.0.0.1:8788/master/application-sit.yml访问git上面的配置文件
             #searchPaths 表示目录：
-            searchPaths: respo
+            searchPaths: config  # git仓库地址下的相对地址(如何直接使用仓库根目录的话，就不用配置此路径)，可以配置多个，用,分割。
+            # username:   # git仓库的账号
+            # password:   # git仓库的密码
 eureka:
   client:
     serviceUrl:
