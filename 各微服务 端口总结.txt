@@ -1,0 +1,5 @@
+cloud-zuul微服务网关 ：8888
+config-server服务配置中心： 8788
+app-item：  8081
+app-eureka-center  8100
+product-view-service-feign  8765

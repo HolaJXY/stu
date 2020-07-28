@@ -17,7 +17,7 @@ spring:
         enabled: true
         #这个是配置服务器在 eureka server 里的服务名称，这样就可以定位 config-server了
         serviceId: config-server
-    #新增 but总线配置  http://localhost:8765/actuator/bus-refresh需要向这个URL发送请求完成刷新
+    #新增 but总线配置  http://localhost:8765/actuator/bus-refresh需要向这个URL发送请求完成刷新 开启rabbitmq可以完成集群的全部更新
     bus:
       enabled: true
       trace:
@@ -32,4 +32,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:8100/eureka
+feign:
+  hystrix:
+    # 开启断路器
+    enabled: true
 

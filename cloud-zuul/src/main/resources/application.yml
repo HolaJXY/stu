@@ -1,0 +1,33 @@
+###服务端口号(本身是一个web项目)
+server:
+  port: 8888
+###起个名字作为服务名称(该服务注册到eureka注册中心的名称，比如商品服务)
+spring:
+    application:
+        name: app-zuul
+    zipkin:
+        base-url: http://localhost:9411
+###服务注册到eureka注册中心的地址
+eureka:
+  client:
+    service-url:
+           defaultZone: http://127.0.0.1:8100/eureka
+    ###因为该应用为服务提供者，是eureka的一个客户端，需要注册到注册中心
+    register-with-eureka: true
+    ###是否需要从eureka上检索服务
+    fetch-registry: true
+zuul:
+  #加上统一的前缀，那么访问的时候一定要加上这个前缀才可以访问到
+  prefix: /api
+  #routes下面指定代理规则，可以同时指定多个
+  routes:
+    #指定第一个规则，这里的名称任意
+    api-a:
+      #指定可以访问的路由
+      path: /api-data/**
+      #指定的实例名称  http://localhost:8888/api/api-data/hi
+      serviceId: app-item
+    api-b:
+      path: /api-view/**
+      serviceId: app-item
+  ignored-patterns: /api-data/config/**   # 取消指定的一个  /api-order/order/**     # 使用通配符去掉order下的全部接口
