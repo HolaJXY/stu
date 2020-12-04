@@ -1,4 +1,4 @@
-打出标准的SpringBoot项目包
+打出标准的SpringBoot项目集成zip包
 
 最终生成一个zip，一个tar.gz
 
