@@ -21,4 +21,7 @@ public interface SchedualServiceHi {
 
   @RequestMapping(value = "/hi",method = RequestMethod.GET)
   String sayHiFromClientOne(@RequestParam(value = "name") String name);
+
+  @RequestMapping(value = "/getAssetInfo",method = RequestMethod.POST)
+  String getAssetInfo(@RequestParam(value = "assetNo") String assetNo);
 }

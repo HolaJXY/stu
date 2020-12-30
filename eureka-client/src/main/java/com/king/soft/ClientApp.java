@@ -1,10 +1,16 @@
 package com.king.soft;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.king.soft.entity.AssetInfo;
+import com.king.soft.mapper.AssetInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,12 +34,24 @@ public class ClientApp {
       SpringApplication.run(ClientApp.class, args);
   }
 
+  @Autowired
+  private AssetInfoService assetInfoService;
+
   @Value("${server.port}")
   String port;
 
   @RequestMapping("/hi")
   public String home(@RequestParam(value = "name", defaultValue = "forezp") String name) {
     return "hi " + name + " ,i am from port:" + port;
+  }
+
+  @RequestMapping("/getAssetInfo")
+  public AssetInfo getAssetInfo(@RequestParam(value = "assetNo", defaultValue = "forezp") String assetNo) {
+    QueryWrapper<AssetInfo> queryWrapper = new QueryWrapper<>();
+    if(!StringUtils.isEmpty(assetNo)) {
+        queryWrapper = queryWrapper.eq("asset_no", assetNo);
+    }
+    return assetInfoService.getOne(queryWrapper);
   }
 
 }

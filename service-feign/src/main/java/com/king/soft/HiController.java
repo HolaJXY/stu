@@ -37,4 +37,9 @@ public class HiController {
   public String products(@RequestParam String name) {
     return version;
   }
+
+  @RequestMapping("/getAssetInfo")
+  public String getAssetInfo(@RequestParam(value = "assetNo") String assetNo) {
+      return schedualServiceHi.getAssetInfo(assetNo);
+  }
 }

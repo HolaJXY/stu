@@ -10,4 +10,9 @@ public class ProductClientFeignHystrix implements SchedualServiceHi {
     public String sayHiFromClientOne(String name) {
         return "请检查服务是否健康";
     }
+
+  @Override
+  public String getAssetInfo(String assetNo) {
+    return "请检查服务是否健康";
+  }
 }
